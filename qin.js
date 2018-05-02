@@ -104,4 +104,16 @@
     }
     window['Q']['getElementsByClassName']=getElementsByClassName;
 
+    // toggleDisplay方法
+    function toggleDisplay(node,value) {
+        if(!(node=$(node))){return false;}
+        if(node.style.display!='none'){
+            node.style.display='none';
+        }else{
+            node.style.display=value||'';
+        }
+        return true;
+    }
+    window['Q']['toggleDisplay']=toggleDisplay;
+
 })()
