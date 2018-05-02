@@ -38,4 +38,70 @@
 
     }
     window['Q']['$']=$;
+
+    // addEvent()和removeEvent()方法
+    function addEvent(node,type,listener) {
+        // 
+        if(!isCompatible){return false}
+        if(!(node=$(node))){return false}
+        if(node.addEventListener){
+            // w3c
+            node.addEventListener(type,listener,false);
+            return true;
+        }else if(node.attachEvent){
+            node['e'+type+listener]=listener;
+            node[type+listener]=function () {
+                node['e'+type+listener](window.event);
+            };
+            node.attachEvent('on'+type,node[type+listener]);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    window['Q']['addEvent']=addEvent;
+    // removeEvent
+
+    function removeEvent(node,type,listener) {
+        if(!(node=$(node))){return false}
+        if(node.removeEventListener){
+            node.removeEventListener(type,listener,false);
+            return true;
+        }else if(node.detachEvent){
+            // ie
+            node.detachEvent('on'+type,node[type+listener]);
+            node[type+listener]=null;
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    window['Q']['removeEvent']=removeEvent;
+
+    // getElementsByClassName
+    function getElementsByClassName(className,tag,parent) {
+        parent=parent||document;
+        if(!(parent=$(parent))){
+            return false;
+        }
+        // 查找所有匹配的元素
+        var allTags=(tag == '*' && parent.all)?parent.all:parent.getElementsByTagName(tag);
+        var matchingElements=new Array();
+        // 创建一个正则，用来判断class是否正确
+        className=className.replace(/\-/,'\\-');
+        var regex=new RegExp('(^|\\s)'+className+'($|\\s)')
+        // 检查每个元素
+        var element;
+        for (var i = 0, l = allTags.length; i < l; i++) {
+            element=allTags[i];
+            if(regex.test(element.className)){
+                matchingElements.push(element);
+            }
+            
+        }
+        return matchingElements;
+    }
+    window['Q']['getElementsByClassName']=getElementsByClassName;
+
 })()

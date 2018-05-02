@@ -8,15 +8,26 @@
     <script src="./qin.js"></script>
 </head>
 <body>  
-    <div id="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
     <div id="box1"></div>
     <div id="box3"></div>
     <script>
         //` 测试isCompatible
         //  console.log(Q.isCompatible(window))
         
-        console.log(Q.$('box'));
-        console.log(Q.$('box1','box2','box3'));
+        // console.log(Q.$('box'));
+        // console.log(Q.$('box1','box2','box3'));
+        
+        // ` 测试addEvent removeEvent
+        // function sayHello() {
+        //     alert('hello');
+        // }
+        // Q.addEvent(window,'load',sayHello);
+        // Q.removeEvent(window,'load',sayHello);
+        // `getElementsByClassName
+        console.log(Q.getElementsByClassName('box','div',document))
     </script>
 </body>
 </html>
